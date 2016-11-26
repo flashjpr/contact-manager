@@ -1,0 +1,20 @@
+{
+  "name": "contact-manager-material",
+  "description": "The application will be split in two parts:",
+  "main": "index.js",
+  "authors": [
+    "Mihai Fleseriu"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/flashjpr/contact-manager",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.1.1"
+  }
+}
