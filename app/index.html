@@ -16,14 +16,23 @@
     </style>
     <title>Contact Manager</title>
 </head>
-<body ng-cloak ng-controller="mainController as vm">
-    <h1>Contacts Manager App</h1>
-    <h2>{{vm.message}}</h2>
+<body layout="row" ng-cloak ng-controller="mainController as vm">
+
+    <div flex="30" style="background-color: #009688">
+        Sidenav
+    </div>
+
+    <div layout="column" flex>
+        <div style="background-color: #3949ab">Toolbar</div>
+        <md-content flex>
+            Main content
+        </md-content>
+    </div>
+
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
-
 
     <script src="./dist/models.js"></script>
     <script src="./dist/services/userService.js"></script>
