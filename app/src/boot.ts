@@ -2,5 +2,6 @@
 
 module ContactManagerApp {
     angular.module('contactManagerApp', ['ngMaterial'])
-        . controller('mainController', MainController);
+        .service('userService', UserService)
+        .controller('mainController', MainController);
 }
