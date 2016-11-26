@@ -2,19 +2,23 @@
 var ContactManagerApp;
 (function (ContactManagerApp) {
     var MainController = (function () {
-        function MainController(userService) {
+        function MainController(userService, $mdSidenav) {
             this.userService = userService;
+            this.$mdSidenav = $mdSidenav;
             this.users = [];
             this.message = "Hello from the other side ! ";
-            var vm = this;
+            var self = this;
             this.userService
                 .loadAllUsers()
                 .then(function (users) {
-                vm.users = users;
-                console.log(vm.users);
+                self.users = users;
+                console.log(self.users);
             });
         }
-        MainController.$inject = ['userService'];
+        MainController.prototype.toogleSidenav = function () {
+            this.$mdSidenav('left').toggle();
+        };
+        MainController.$inject = ['userService', '$mdSidenav'];
         return MainController;
     }());
     ContactManagerApp.MainController = MainController;

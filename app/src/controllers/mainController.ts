@@ -3,19 +3,26 @@
 module ContactManagerApp {
     export class MainController {
 
-        static $inject = ['userService'];
-        constructor(private userService: IUserService){
+        static $inject = ['userService', '$mdSidenav'];
+        constructor(
+            private userService: IUserService,
+            private $mdSidenav: angular.material.ISidenavService){
 
-            var vm = this;
+            var self = this;
             this.userService
                 .loadAllUsers()
                 .then((users: User[]) => {
-                    vm.users = users;
-                    console.log(vm.users);
+                    self.users = users;
+                    console.log(self.users);
                 });
+
         }
 
         users: User[] = [];
-        message: string = "Hello from the other side ! "
+        message: string = "Hello from the other side ! ";
+
+        toogleSidenav(): void {
+            this.$mdSidenav('left').toggle();
+        }
     }
 }

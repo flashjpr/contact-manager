@@ -18,13 +18,11 @@
 </head>
 <body layout="row" ng-cloak ng-controller="mainController as vm">
 
-    <div flex="30" style="background-color: #009688">
-        Sidenav
-    </div>
+    <div ng-include="'dist/views/sidenav.html'" layout="vertical"></div>
 
     <div layout="column" flex>
-        <div style="background-color: #3949ab">Toolbar</div>
-        <md-content flex>
+        <div ng-include="'dist/views/toolbar-header.html'"></div>
+        <md-content flex id="content">
             Main content
         </md-content>
     </div>
