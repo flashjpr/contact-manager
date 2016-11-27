@@ -1,4 +1,7 @@
+<div ng-include="'dist/views/tab-notes-form.html'"></div>
+
 <p ng-if="!vm.selecterUser.notes.length">No notes for {{vm.selectedUser.name}}, yet.</p>
+
 <md-content>
     <md-card ng-repeat="note in vm.selectedUser.notes | orderBy: '-date': true">
         <md-card-content>

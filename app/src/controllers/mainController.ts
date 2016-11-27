@@ -34,6 +34,7 @@ module ContactManagerApp {
         searchText: string = '';
         users: User[] = [];
         selectedUser: User = null;
+        newNote: Note = new Note('', null);
 
         toogleSidenav(): void {
             this.$mdSidenav('left').toggle();
@@ -99,6 +100,12 @@ module ContactManagerApp {
                 self.selectedUser.notes = [];
                 self.openToast('Cleared notes');
             });
+        }
+
+        addNote() {
+            this.selectedUser.notes.push(this.newNote);
+            this.newNote = new Note('', null);
+            this.openToast('Note added');
         }
 
         removeNote(note: Note): void {

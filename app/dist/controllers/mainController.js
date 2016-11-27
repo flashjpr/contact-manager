@@ -13,6 +13,7 @@ var ContactManagerApp;
             this.searchText = '';
             this.users = [];
             this.selectedUser = null;
+            this.newNote = new ContactManagerApp.Note('', null);
             var self = this;
             this.userService
                 .loadAllUsers()
@@ -79,6 +80,11 @@ var ContactManagerApp;
                 self.selectedUser.notes = [];
                 self.openToast('Cleared notes');
             });
+        };
+        MainController.prototype.addNote = function () {
+            this.selectedUser.notes.push(this.newNote);
+            this.newNote = new ContactManagerApp.Note('', null);
+            this.openToast('Note added');
         };
         MainController.prototype.removeNote = function (note) {
             var foundIndex = this.selectedUser.notes.indexOf(note);
