@@ -5,6 +5,7 @@ var ContactManagerApp;
         function MainController(userService, $mdSidenav) {
             this.userService = userService;
             this.$mdSidenav = $mdSidenav;
+            this.tabIndex = 0;
             this.searchText = '';
             this.users = [];
             this.selectedUser = null;
@@ -15,6 +16,7 @@ var ContactManagerApp;
                 self.users = users;
                 // as default, the selected user is the first in the list
                 self.selectedUser = users[0];
+                console.log(self.tabIndex);
             });
         }
         MainController.prototype.toogleSidenav = function () {
@@ -26,6 +28,7 @@ var ContactManagerApp;
             if (sidenav.isOpen()) {
                 sidenav.close();
             }
+            this.tabIndex = 0;
         };
         MainController.$inject = ['userService', '$mdSidenav'];
         return MainController;
