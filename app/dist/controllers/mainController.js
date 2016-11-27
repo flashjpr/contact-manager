@@ -21,7 +21,6 @@ var ContactManagerApp;
                 // as default, the selected user is the first in the list
                 self.selectedUser = users[0];
                 self.userService.selectedUser = self.selectedUser;
-                console.log(self.tabIndex);
             });
         }
         MainController.prototype.toogleSidenav = function () {
@@ -60,6 +59,9 @@ var ContactManagerApp;
                 clickOutsideToClose: true,
                 fullscreen: useFullScreen
             }).then(function (user) {
+                var newUser = ContactManagerApp.User.fromCreate(user);
+                self.users.push(newUser);
+                self.selectUser(newUser);
                 self.openToast('User added');
             }, function () {
                 console.log('You canceled the dialog.');

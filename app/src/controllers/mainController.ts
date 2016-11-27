@@ -26,8 +26,7 @@ module ContactManagerApp {
                     // as default, the selected user is the first in the list
                     self.selectedUser = users[0];
                     self.userService.selectedUser = self.selectedUser;
-                    console.log(self.tabIndex);
-                });
+                    });
 
         }
 
@@ -77,7 +76,10 @@ module ContactManagerApp {
                 controllerAs: 'ctrl',
                 clickOutsideToClose: true,
                 fullscreen: useFullScreen
-            }).then((user: User) => {
+            }).then((user: CreateUser) => {
+                var newUser: User = User.fromCreate(user);
+                self.users.push(newUser);
+                self.selectUser(newUser);
                 self.openToast('User added');
             }, () => {
                 console.log('You canceled the dialog.')
