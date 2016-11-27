@@ -81,8 +81,14 @@ var ContactManagerApp;
                 self.openToast('Cleared notes');
             });
         };
+        MainController.prototype.setFormScope = function (scope) {
+            this.formScope = scope;
+        };
         MainController.prototype.addNote = function () {
             this.selectedUser.notes.push(this.newNote);
+            // reset  the form
+            this.formScope.noteForm.$setUntouched();
+            this.formScope.noteForm.$setPristine();
             this.newNote = new ContactManagerApp.Note('', null);
             this.openToast('Note added');
         };

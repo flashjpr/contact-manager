@@ -10,20 +10,32 @@
                                 <md-icon md-svg-icon="{{avatar}}"></md-icon>
                             </md-option>
                         </md-select>
+                        <div ng-messages="userForm.avatar.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>First name</label>
-                        <input type="text" ng-model="ctrl.user.firstName" name="firstName">
+                        <input type="text" ng-model="ctrl.user.firstName" name="firstName" required>
+                        <div ng-messages="userForm.firstName.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Last name</label>
-                        <input type="text" ng-model="ctrl.user.lastName" name="lastName">
+                        <input type="text" ng-model="ctrl.user.lastName" name="lastName" required>
+                        <div ng-messages="userForm.lastName.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
                     </md-input-container>
                 </div>
 
                 <md-input-container class="md-block" flex>
                     <label>Biography</label>
-                    <textarea ng-model="ctrl.user.bio" name="bio" rows="5"></textarea>
+                    <textarea ng-model="ctrl.user.bio" name="bio" rows="5" required></textarea>
+                    <div ng-messages="userForm.bio.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
                 </md-input-container>
             </div>
         </md-dialog-content>
@@ -32,7 +44,8 @@
             <md-button ng-click="ctrl.cancel()">
                 Cancel
             </md-button>
-            <md-button type="submit" class="md-primary md-raised">
+            <md-button type="submit" class="md-primary md-raised"
+                       ng-disabled="userForm.$invalid">
                 Save
             </md-button>
         </md-dialog-actions>
