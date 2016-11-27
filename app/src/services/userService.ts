@@ -28,11 +28,11 @@ module ContactManagerApp {
                 notes: [
                     {
                         title: "Remember him to finish the Angular-JS Testing in-depth course on Pluralsight",
-                        date: new Date("2016-01-12")
+                        date: new Date("2017-01-12")
                     },
                     {
                         title: "Buy him a beer",
-                        date: new Date("2017-00-14")
+                        date: new Date("2015-01-14")
                     }
                 ]
             },
