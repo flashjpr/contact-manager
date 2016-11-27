@@ -3,12 +3,20 @@
 module ContactManagerApp {
     export class MainController {
 
-        static $inject = ['userService', '$mdSidenav', '$mdToast', '$mdDialog'];
+        static $inject = [
+            'userService',
+            '$mdSidenav',
+            '$mdToast',
+            '$mdDialog',
+            '$mdMedia',
+            '$mdBottomSheet'];
         constructor(
             private userService: IUserService,
             private $mdSidenav: angular.material.ISidenavService,
             private $mdToast: angular.material.IToastService,
-            private $mdDialog: angular.material.IDialogService){
+            private $mdDialog: angular.material.IDialogService,
+            private $mdMedia: angular.material.IMedia,
+            private $mdBottomSheet){
 
             var self = this;
             this.userService
@@ -17,6 +25,7 @@ module ContactManagerApp {
                     self.users = users;
                     // as default, the selected user is the first in the list
                     self.selectedUser = users[0];
+                    self.userService.selectedUser = self.selectedUser;
                     console.log(self.tabIndex);
                 });
 
@@ -33,6 +42,7 @@ module ContactManagerApp {
 
         selectUser(user: User): void {
             this.selectedUser = user;
+            this.userService.selectedUser = user;
 
             var sidenav = this.$mdSidenav('left');
             if(sidenav.isOpen()) {
@@ -41,6 +51,38 @@ module ContactManagerApp {
 
             this.tabIndex = 0;
         }
+
+        showContactOptions($event) {
+            this.$mdBottomSheet.show({
+                parent: angular.element(document.getElementById('wrapper')),
+                templateUrl: './dist/views/contactSheet.html',
+                controller: ContactPanelController,
+                controllerAs: 'cp',
+                bindToController : true,
+                targetEvent: $event
+            }).then((clickedItem) => {
+                clickedItem && console.log(clickedItem.name + ' clicked!')
+            })
+        }
+
+        addUser($event) {
+            var self = this;
+            var useFullScreen = (this.$mdMedia('sm') || this.$mdMedia('xs'));
+
+            this.$mdDialog.show({
+                templateUrl: 'dist/views/newUserDialog.html',
+                parent: angular.element(document.body),
+                targetEvent: $event,
+                controller: AddUserDialogController,
+                controllerAs: 'ctrl',
+                clickOutsideToClose: true,
+                fullscreen: useFullScreen
+            }).then((user: User) => {
+                self.openToast('User added');
+            }, () => {
+                console.log('You canceled the dialog.')
+            })
+         }
 
         clearNotes($event) {
             var confirm = this.$mdDialog.confirm()
