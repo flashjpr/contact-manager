@@ -8,10 +8,25 @@
         <h1>Contacts</h1>
     </md-toolbar>
 
+    <div layout-padding>
+        <md-autocomplete
+            md-search-text="vm.searchText"
+            md-items="item in vm.users | filter:vm.searchText"
+            md-item-text="item.name"
+            md-min-length="3"
+            placeholder="filter">
+            <md-item-template>
+                <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.name}}</span>
+            </md-item-template>
+            <md-not-found>
+                No contact matching {{vm.searchText}} found.
+            </md-not-found>
+    </div>
+
     <md-content>
         <md-list>
-            <md-list-item ng-repeat="user in vm.users | orderBy:'name'">
-                <md-button ng-click="'vm.selectUser(user)'"
+            <md-list-item ng-repeat="user in vm.users | filter:vm.searchText | orderBy:'name'">
+                <md-button ng-click="vm.selectUser(user)"
                            ng-class="{'selected': user === vm.selectedUser}">
                     <md-icon md-svg-icon="{{user.avatar}}" class="avatar"></md-icon>
                     {{user.name}}

@@ -13,13 +13,13 @@ module ContactManagerApp {
                 .loadAllUsers()
                 .then((users: User[]) => {
                     self.users = users;
+                    // as default, the selected user is the first in the list
                     self.selectedUser = users[0];
-                    console.log(self.users);
-                    console.log('selected user',self.selectedUser);
                 });
 
         }
 
+        searchText: string = '';
         users: User[] = [];
         selectedUser: User = null;
 

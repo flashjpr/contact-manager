@@ -5,6 +5,7 @@ var ContactManagerApp;
         function MainController(userService, $mdSidenav) {
             this.userService = userService;
             this.$mdSidenav = $mdSidenav;
+            this.searchText = '';
             this.users = [];
             this.selectedUser = null;
             var self = this;
@@ -12,9 +13,8 @@ var ContactManagerApp;
                 .loadAllUsers()
                 .then(function (users) {
                 self.users = users;
+                // as default, the selected user is the first in the list
                 self.selectedUser = users[0];
-                console.log(self.users);
-                console.log('selected user', self.selectedUser);
             });
         }
         MainController.prototype.toogleSidenav = function () {
