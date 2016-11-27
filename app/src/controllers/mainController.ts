@@ -13,16 +13,27 @@ module ContactManagerApp {
                 .loadAllUsers()
                 .then((users: User[]) => {
                     self.users = users;
+                    self.selectedUser = users[0];
                     console.log(self.users);
+                    console.log('selected user',self.selectedUser);
                 });
 
         }
 
         users: User[] = [];
-        message: string = "Hello from the other side ! ";
+        selectedUser: User = null;
 
         toogleSidenav(): void {
             this.$mdSidenav('left').toggle();
+        }
+
+        selectUser(user: User): void {
+            this.selectedUser = user;
+
+            var sidenav = this.$mdSidenav('left');
+            if(sidenav.isOpen()) {
+                sidenav.close();
+            }
         }
     }
 }
